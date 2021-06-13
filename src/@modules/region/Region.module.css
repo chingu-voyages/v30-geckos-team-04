@@ -10,6 +10,19 @@
 .title {
   margin-bottom: 1rem;
 }
+.label {
+  font-weight: bold;
+  padding-right: 1rem;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+.card {
+  border: 2px solid black;
+  padding: 1rem;
+}
 /* Desktop */
 @media screen and (min-width: mediaQuery) {
   .region {

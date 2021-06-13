@@ -3,16 +3,33 @@ import axios from "axios";
 import styles from "./Region.module.css";
 import SearchBar from "../search/SearchBar";
 import CurrentContext from "../../context/Current";
-import Card from "../common/components/card/Card";
-
+import Card from "../../@modules/common/components/card/Card";
 const Region = () => {
   const { currentLocation } = useContext(CurrentContext);
   console.log("currentLocation", currentLocation);
+  const [data, setData] = useState([44.8367, -91.3621]);
+
+  useEffect(() => {
+    const fetchLatAndLong = async () => {
+      try {
+        const result = await axios.get(
+          `http://www.mapquestapi.com/geocoding/v1/address?key=${process.env.REACT_APP_MAPQUEST}&location=${currentLocation}`
+        );
+        setData(result.data.results[0].locations[0].displayLatLng);
+      } catch (error) {
+        console.error(error);
+      }
+      return data;
+    };
+    if (currentLocation.length > 0) {
+      fetchLatAndLong();
+    }
+  }, [currentLocation]);
+  console.log("loc data", currentLocation, data);
+
   const useGetMeasurements = (location) => {
     const [results, setResults] = useState([]);
-
     useEffect(() => {
-      const data = [44.8367, -91.3621];
       const fetchMeasurements = async (location) => {
         try {
           const response = await axios(
@@ -32,8 +49,8 @@ const Region = () => {
     return results;
   };
   const results = useGetMeasurements(currentLocation);
-
   console.log("results", results);
+
   return (
     <div className={styles.region}>
       <h1 className={styles.title}>Region</h1>
@@ -49,9 +66,9 @@ const Region = () => {
         <>
           <h2>Search Results-{results.location}</h2>
           <Card
-            location={results.location}
-            country={results.country}
-            measurements={results.measurements}
+            location={results?.location}
+            country={results?.country}
+            measurements={results?.measurements}
           />
         </>
       )}
