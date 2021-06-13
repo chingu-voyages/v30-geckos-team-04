@@ -7,41 +7,53 @@ import Card from "../common/components/card/Card";
 
 const Region = () => {
   const { currentLocation } = useContext(CurrentContext);
-  const [data, setData] = useState([]);
-  const [latAndLong] = useState([40.6673, -111.7996]);
+  console.log("currentLocation", currentLocation);
+  const useGetMeasurements = (location) => {
+    const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    const fetchMeasurements = async () => {
-      try {
-        const result = await axios.get(
-          `https://docs.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&coordinates=${latAndLong[0]}%2C${latAndLong[1]}&radius=100&order_by=lastUpdated&dumpRaw=false`
-        );
-        setData(result.data.results);
-      } catch (error) {
-        console.error(error);
+    useEffect(() => {
+      const data = [44.8367, -91.3621];
+      const fetchMeasurements = async (location) => {
+        try {
+          const response = await axios(
+            `https://docs.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&coordinates=${data[0]}%2C${data[1]}&radius=100&order_by=lastUpdated&dumpRaw=false`
+          );
+          const measurements = response.data.results[0];
+          console.log("measurements ", measurements);
+          setResults(measurements);
+        } catch (error) {
+          console.log("error", error.message);
+        }
+      };
+      if (location !== "") {
+        fetchMeasurements(location);
       }
-    };
-    fetchMeasurements();
-    console.log("fetch happened");
-  }, [latAndLong]);
-  console.log("data", data);
-  console.log("current Location ", currentLocation);
+    }, [location]);
+    return results;
+  };
+  const results = useGetMeasurements(currentLocation);
 
+  console.log("results", results);
   return (
     <div className={styles.region}>
       <h1 className={styles.title}>Region</h1>
       <SearchBar />
-      {data.length > 0 ? (
+      {currentLocation.length === 0 ? (
+        <></>
+      ) : results.length > 0 ? (
         <>
-          <h2 className={styles.title}>Search Results-{data[0].location}</h2>
-          <Card
-            location={data[0].location}
-            country={data[0].country}
-            measurements={data[0].measurements}
-          />
+          <h2>Search Results-{results.location}</h2>
+          <h2>No Results Found</h2>
         </>
       ) : (
-        <></>
+        <>
+          <h2>Search Results-{results.location}</h2>
+          <Card
+            location={results.location}
+            country={results.country}
+            measurements={results.measurements}
+          />
+        </>
       )}
     </div>
   );
