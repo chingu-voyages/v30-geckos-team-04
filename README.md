@@ -1,14 +1,19 @@
-# voyage-tasks
+# CLEAN THE AIR
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should but as much care into it's creation and maintenance steps
-as you would any other component of the application.
+"1 out of 8 deaths in the world is due to poor air quality" [Open AQ ](https://openAQ.org)
+This is an educational application dedicated to informing people about the issues involved in air quality.
 
-If you are unsure of what should go into the `readme` let this article
-written by another Chingu be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+# Features
 
-And before we go there's "one more thing"! Once you've decide what to include
-in your `readme` feel free to replace the text we've provided here.
+A World Map page that gives the average air quality per country in the last day in an interactive tooltip.
 
-> Own it & Make it your Own!
+A Region page that provides more detailed information about a particular location or region.
+
+# Motivation
+
+We believe 8.8 million deaths each year, 90% in developing countries require informed action. [Open AQ ](https://openAQ.org/#/why)
+
+## Chingu Voyage 30 Geckos Team 4 | [Chingu ] (https://chingu.io/)
+
+Regina: https://github.com/rmcguire6
+Soyoung: https://github.com/jo-soyoung
