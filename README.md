@@ -15,5 +15,5 @@ We believe 8.8 million deaths each year, 90% in developing countries require inf
 
 ## Chingu Voyage 30 Geckos Team 4 | [Chingu ] (https://chingu.io/)
 
-Regina: https://github.com/rmcguire6
-Soyoung: https://github.com/jo-soyoung
+- Regina: https://github.com/rmcguire6
+- Soyoung: https://github.com/jo-soyoung
